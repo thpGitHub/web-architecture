@@ -12,8 +12,10 @@ fastify.register(require('@fastify/mongodb'), {
     // the default value is false
     forceClose: true,
     
-    url: 'mongodb://mongo:27017/quiz_bdd_in_docker'
-    // url: 'mongodb://localhost:27017/quiz_bdd_in_docker'
+    // url: 'mongodb://mongo:27017/quiz_bdd_in_docker'
+    //url: 'mongodb://localhost:27017/quiz_bdd_in_docker'
+    // url: 'mongodb://127.0.0.1:27017/quiz_bdd_in_docker'
+    url: 'mongodb://172.17.0.2:27017/quiz_bdd_in_docker'
   })
 
 // Declare a route
@@ -22,7 +24,8 @@ fastify.get('/', function handler (request, reply) {
 })
 
 // Run the server!
-fastify.listen({ port: 3030 }, (err) => {
+fastify.listen({ port: 3030, host: '0.0.0.0' }, (err) => {
+// fastify.listen({ port: 3030 }, (err) => {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
